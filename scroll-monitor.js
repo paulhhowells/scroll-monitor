@@ -39,9 +39,7 @@ var scrollMonitor = (function() {
   };
 
   function on (event, fn) {
-    var args, record;
-
-    record = { fn : fn };
+    var record = { fn : fn };
 
     if (arguments.length > 2) {
       record.args = Array.prototype.slice.call(arguments);
