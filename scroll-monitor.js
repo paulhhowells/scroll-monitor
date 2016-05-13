@@ -133,6 +133,11 @@ var scrollMonitor = (function(options) {
       // has not recently set scroll to true, so assume that scrolling has
       // stopped, and therefore does not have a direction.
       direction = 'none';
+
+      if (intervalFrequency !== intervalFrequencySlow) {
+        intervalFrequency = intervalFrequencySlow;
+        startInterval();
+      }
     }
 
     scrolling = false;
@@ -142,6 +147,15 @@ var scrollMonitor = (function(options) {
     previousScrollTop = scrollTop;
     scrollTop = $(window).scrollTop();
     scrolling = true;
+
+    if (direction === NONE) {
+      intervalCallback();
+
+      if (intervalFrequency !== intervalFrequencyFast) {
+        intervalFrequency = intervalFrequencyFast;
+        startInterval();
+      }
+    }
   }
 
   function startInterval () {
