@@ -120,4 +120,9 @@ var scrollMonitor = (function(options) {
     scrollTop = $(window).scrollTop();
     scrolling = true;
   }
+
+  function startInterval () {
+    window.clearInterval(intervalID);
+    intervalID = window.setInterval(intervalCallback, intervalFrequency);
+  }
 }());
