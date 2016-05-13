@@ -29,6 +29,16 @@ var scrollMonitor = (function(options) {
     dec : []
   };
 
+  if (options) {
+    if (options.hasOwnProperty('intervalFrequencySlow')) {
+      intervalFrequencySlow = options.intervalFrequencySlow;
+    }
+    if (options.hasOwnProperty('intervalFrequencyFast')) {
+      intervalFrequencySlow = options.intervalFrequencyFast;
+    }
+  }
+  intervalFrequency = intervalFrequencySlow;
+
   // On ready.
   $(function () {
     // Capture scroll.
