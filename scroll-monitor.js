@@ -5,7 +5,7 @@
  * @method: on
  * @returns: {object} An object with the on method.
  */
-var scrollMonitor = (function() {
+var scrollMonitor = (function(options) {
   'use strict';
 
   var
@@ -16,8 +16,8 @@ var scrollMonitor = (function() {
     scrollTop,
     previousScrollTop,
     intervalFrequencySlow = 300,
-    intervalFrequencyFast = 50,
-    intervalFrequency = intervalFrequencySlow,
+    intervalFrequencyFast = 150,
+    intervalFrequency,
     intervalID,
     direction,
     previousDirection,
