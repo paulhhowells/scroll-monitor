@@ -21,12 +21,15 @@ var scrollMonitor = (function(options) {
     intervalID,
     direction,
     previousDirection,
+    zero,
     callbacks;
 
   callbacks = {
     change : [],
+    dec : [],
     inc : [],
-    dec : []
+    stop : [],
+    zero : []
   };
 
   if (options) {
@@ -113,6 +116,15 @@ var scrollMonitor = (function(options) {
       // Has direction changed, but not stopped?
       if (direction !== previousDirection) {
         event(direction);
+      }
+
+      // Hypothesis: a scroll event occurs whenever scrollTop becomes zero.
+      if (scrollTop > 0) {
+        zero = false;
+      }
+      else if (zero !== true) {
+        event('zero');
+        zero = true;
       }
     }
     else {
