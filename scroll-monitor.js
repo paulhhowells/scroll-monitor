@@ -113,9 +113,10 @@ var scrollMonitor = (function(options) {
         direction = NONE;
       }
 
-      // Has direction changed, but not stopped?
-      if (direction !== previousDirection) {
         event(direction);
+
+      if (direction !== previousDirection) {
+        event('change', direction);
       }
 
       // Hypothesis: a scroll event occurs whenever scrollTop becomes zero.
