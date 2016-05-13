@@ -98,6 +98,7 @@ var scrollMonitor = (function(options) {
 
   function intervalCallback () {
     if (scrolling) {
+      // A scroll has occured since this callback was last called.
 
       // Determine direction of scroll.
       // It can be confusing to refer to scrolling up and down, so 'inc' and
