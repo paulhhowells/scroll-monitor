@@ -9,6 +9,9 @@ var scrollMonitor = (function() {
   'use strict';
 
   var
+    INC = 'inc',
+    DEC = 'dec',
+    NONE = 'none',
     scrolling = false,
     scrollTop,
     previousScrollTop,
@@ -88,13 +91,13 @@ var scrollMonitor = (function() {
       // 'dec' are used to record scrollTop increasing and decreasing.
       previousDirection = direction;
       if (scrollTop > previousScrollTop) {
-        direction = 'inc';
+        direction = INC;
       }
       else if (scrollTop < previousScrollTop) {
-        direction = 'dec';
+        direction = DEC;
       }
       else if (scrollTop === previousScrollTop) {
-        direction = 'none';
+        direction = NONE;
       }
 
       // Has direction changed, but not stopped?
