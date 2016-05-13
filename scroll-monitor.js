@@ -58,7 +58,7 @@ var scrollMonitor = (function() {
     }
   }
 
-  function run (records) {
+  function run (records, message) {
     var
       i,
       arrayLength = records.length,
@@ -70,9 +70,14 @@ var scrollMonitor = (function() {
         record.fn.apply(this, record.args);
       }
       else {
+        if (message) {
+         record.fn(message);
+        }
+        else {
         record.fn();
       }
     }
+  }
   }
 
   function intervalCallback () {
