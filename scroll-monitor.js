@@ -47,9 +47,10 @@ var scrollMonitor = (function(options) {
   $(function () {
     // Capture scroll.
     $(window).on('scroll', scrollCallback);
-  });
 
+    // Start polling to detect scrolling.
   intervalID = window.setInterval(intervalCallback, intervalFrequency);
+  });
 
   return {
     on : on
