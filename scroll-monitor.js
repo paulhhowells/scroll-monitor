@@ -49,30 +49,40 @@ var scrollMonitor = (function(options) {
     $(window).on('scroll', scrollCallback);
 
     // Start polling to detect scrolling.
-  intervalID = window.setInterval(intervalCallback, intervalFrequency);
+    intervalID = window.setInterval(intervalCallback, intervalFrequency);
   });
 
   return {
     on : on
   };
 
+  // A method for adding event listeners and registering callbacks.
   function on (event, fn) {
-    var record = { fn : fn };
+    if (callbacks.hasOwnProperty(event)) {
+      var record = { fn : fn };
 
-    if (arguments.length > 2) {
-      record.args = Array.prototype.slice.call(arguments);
+      if (arguments.length > 2) {
+        record.args = Array.prototype.slice.call(arguments);
+      }
+
+      record.id = event + callbacks[event].length;
+      callbacks[event].push(record);
+
+      return record.id;
     }
-
-    callbacks[event].push(record);
+    else {
+      return false;
+    }
   }
 
-  function event (direction) {
-    if (callbacks.change.length > 0) {
-      run(callbacks.change);
-    }
-
-    if (callbacks[direction] && callbacks[direction].length > 0) {
-      run(callbacks[direction]);
+  function event (event, message) {
+    if (callbacks[event] && callbacks[event].length > 0) {
+      if (message) {
+        run(callbacks[event], message);
+      }
+      else {
+        run(callbacks[event]);
+      }
     }
   }
 
@@ -92,10 +102,10 @@ var scrollMonitor = (function(options) {
          record.fn(message);
         }
         else {
-        record.fn();
+         record.fn();
+        }
       }
     }
-  }
   }
 
   function intervalCallback () {
@@ -116,7 +126,7 @@ var scrollMonitor = (function(options) {
         direction = NONE;
       }
 
-        event(direction);
+      event(direction);
 
       if (direction !== previousDirection) {
         event('change', direction);
