@@ -3,8 +3,9 @@
  * @function
  * @requires: jQuery
  * @method: on
- * @returns: {object} An object with the on method.
+ * @returns: {object} An object with the on method to allow event listener callbacks to be registered for scroll events.
  */
+
 var scrollMonitor = (function(options) {
   'use strict';
 
